@@ -33,14 +33,32 @@ $(window).on('load', function() {
 	}
 
 	$(document).on('click', '.card', function(){
-		const index = $('.card').index(this)
-	  $('img').eq(index).removeClass("hide");
-	  $('img').eq(index).addClass("panzaarriba");
-		var par = $('.panzaarriba').eq(index).attr('src')
-		pares.push(par)
-		console.log($('.panzaarriba').eq(index).attr('src'))
-		console.log($('.panzaarriba').eq(index))
+	  var index = $('.card').index(this);
+	  var ladoA = $(this).children('.imag');
+		var ladoB = $('.card').eq(index);
+			if (pares.length < 2) {
+				pares.push(ladoA.attr('src'))
+				ladoA.removeClass('hide')
+				if (pares[0]==pares[1]) {
+					for (var i = 0; i < pares.length; i++) {
+						ladoA.addClass('borrar')
+						ladoA.addClass('pointer')
+					}
+					pares.length = 0
+				}
+			}else if (pares.length>1){
+				console.log('hola')
+				setTimeout(function(){
+					ladoA.addClass('hide');
+					pares.length=0
+					console.log(ladoA[0]+'y'+ladoA[1])
+				}, 600)
+			}
+
 	})
+
+
+
 })
 
 
