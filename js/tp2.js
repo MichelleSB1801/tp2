@@ -126,7 +126,7 @@ $(window).on('load', function() {
 
 		$('#turnos').html('Intentos restantes:<br><span>' + jugadas+ '</span>')
 
-		if (jugadas==0) {
+		if (jugadas==0 && paresencontrados!=12) {
 			$('#lose').removeClass('hide')
 			$('.card').addClass('hide')
 		}
