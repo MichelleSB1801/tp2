@@ -6,16 +6,22 @@
     <link rel="stylesheet" href="dist/tp2.css">
   </head>
   <body>
-    <div class="prevcontainer hide">
-      <input type="text" class="nombre">
+    <div class="prevcontainer">
+      <input type="text" class="nombre" placeholder="Cómo te llamas?" value="">
+      <span class="gender">Are you a boy or a girl?</span>
+      <div class='boton'>Who cares?</div>
     </div>
-    <div class="juegocontainer">
+    <div class="juegocontainer hide" >
       <div class="navcontainer">
-        <div id="name" class="navi">Martha</div>
-        <div id="turnos" class="navi">24</div>
+        <div id="name" class="navi"></div>
+        <div id="turnos" class="navi">Intentos restantes:<br><span>24</span></div>
+        <div class="pj">
+          <img src="personaje.png">
+        </div>
       </div>
   	  <div class="cardcontainer">
-
+        <div id="win" class="alert hide">Ganaste</div>
+       <div id="lose" class="alert hide">Perdiste</div>
       </div>
     </div>
     <script
