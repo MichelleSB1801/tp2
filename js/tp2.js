@@ -30,27 +30,35 @@ var card24 = new card ('<img class="imag hide" src="Eevee_NB.gif">')
 var cartas = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14, card15, card16, card17, card18, card19, card20, card21, card22, card23, card24];
 
 
-
 $(window).on('load', function() {
 
-	function shuffle(cartas) {
-	cartas = cartas.sort(function() {return Math.random() - 0.5});
-	return cartas;
-	}
-	cartas = shuffle(cartas)
-	console.log(cartas)
+	$(document).on('click', '.boton', function(){
+		var nombre = $('.nombre').val()
+		var boton = $('.boton')
+		$('#name').html(nombre)
+		$('.prevcontainer').addClass('hide')
+		$('.juegocontainer').removeClass('hide')
+	
+		function shuffle(cartas) {
+		cartas = cartas.sort(function() {return Math.random() - 0.5});
+		return cartas;
+		}
+		cartas = shuffle(cartas)
+		console.log(cartas)
 
-	for (var i = 0; i < cartas.length; i++) {
-		var imagen = cartas[i].img
-		var cartaapp = '<div class="card">'+ imagen +'</div>'
-		$('.cardcontainer').append(cartaapp)
-	}
+		for (var i = 0; i < cartas.length; i++) {
+			var imagen = cartas[i].img
+			var cartaapp = '<div class="card">'+ imagen +'</div>'
+			$('.cardcontainer').append(cartaapp)
+		}
+	
+	})
 
 	var clics = 1;
 	var pares = [];
 	var divs = [];
 	var paresencontrados = 0
-	var jugadas = 24
+	var jugadas = 30
 
 	$(document).on('click', '.card', function(){
 	  var index = $('.card').index(this);
@@ -65,61 +73,68 @@ $(window).on('load', function() {
 			divs.push(nada)
 			console.log("pares", pares);
 			imagen.removeClass('hide')
-//			nada.addClass('pointer')
+			nada.addClass('pointer')
 			clics = 2
-//			console.log(clics + "2");
-//			console.log(imagen)
+			console.log(clics + "2");
+			console.log(imagen)
 
 		}else if (clics == 2) {
 			pares.push(imagen.attr('src'))
 			divs.push(nada)
 			console.log("pares", pares);
 			imagen.removeClass('hide')
-//			$('.card').addClass('pointer')
+			$('.card').addClass('pointer')
 
 
-//			if (pares[0] == pares[1]) {
+			if (pares[0] == pares[1]) {
 
-//				console.log(divs);
-			//
+				console.log(divs);
+			
 			//setTimeout(function(){
 
-//					for (var i = 0; i < divs.length; i++) {
-//						divs[i].addClass('borrar')
-//					}
+					for (var i = 0; i < divs.length; i++) {
+						divs[i].addClass('borrar')
+					}
 
 					clics = 1
 			// }, 200)
-//				$('.card').removeClass('pointer')
-//				pares.length = 0
-//				divs.length= 0
-//				paresencontrados++
-//				console.log(paresencontrados);
-//				if (paresencontrados == 6) {
+				$('.card').removeClass('pointer')
+				pares.length = 0
+				divs.length= 0
+				paresencontrados++
+				console.log(paresencontrados);
 
-//					console.log("GANASTE");
+				if (paresencontrados == 12) {
+					$('#win').removeClass('hide')
+					$('.card').addClass('hide')
 				}
 
-//			}else {
-//
-//				setTimeout(function(){
-//					$('.imag').addClass('hide')
-//					$('.card').removeClass('pointer')
-//					clics = 1
-//				}, 600)
+			}else {
 
-//				pares.length = 0
-//				divs.length = 0	
-//				}
-//				jugadas--
+				setTimeout(function(){
+					$('.imag').addClass('hide')
+					$('.card').removeClass('pointer')
+					clics = 1
+				}, 500)
 
-//			}
+				pares.length = 0
+				divs.length = 0	
+				}
+				jugadas--
 
-//		$('#turnos').html(jugadas)
+			}
 
-//		if (jugadas==0) {
-//		 console.log("PERDISTE");
-//		}
+		$('#turnos').html('Intentos restantes:<br><span>' + jugadas+ '</span>')
+
+		if (jugadas==0) {
+			$('#lose').removeClass('hide')
+			$('.card').addClass('hide')
+		}
 
 	})
+
+	$(document).on('click', '.alert', function() {
+    location.reload();
+	});
 })
+
